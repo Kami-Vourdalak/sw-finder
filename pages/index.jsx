@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import AppHeader from '../components/app-header/app-header'
+import SearchForm from '../components/search-form/search-form'
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <AppHeader />
+        <SearchForm />
       </main>
     </>
   )
