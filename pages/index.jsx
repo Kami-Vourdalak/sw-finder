@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import SearchForm from '../components/search-form/search-form'
+import FilmList from '../components/film-list/film-list'
 
 export default function Home() {
   return (
@@ -11,6 +12,9 @@ export default function Home() {
       </Head>
       <main>
         <SearchForm />
+        <div className="flex flex-wrap w-full p-6">
+          <FilmList />
+        </div>
       </main>
     </>
   )
