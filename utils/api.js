@@ -3,33 +3,36 @@ import axios from 'axios'
 
 export async function fetchSwFilmsByQuery({ queryKey }) {
   const [, query] = queryKey
+  const words = query.includes(' ')
+    ? query.split(' ').filter(word => word !== '')
+    : [query]
 
-  const peoplePromise = axios.get(
-    `https://swapi.dev/api/people/?search=${query}`
-  )
-  const planetsPromise = axios.get(
-    `https://swapi.dev/api/planets/?search=${query}`
-  )
-  const speciesPromise = axios.get(
-    `https://swapi.dev/api/species/?search=${query}`
-  )
-  const starshipsPromise = axios.get(
-    `https://swapi.dev/api/starships/?search=${query}`
-  )
-  const vehiclesPromise = axios.get(
-    `https://swapi.dev/api/vehicles/?search=${query}`
-  )
+  const queries = []
+  words.forEach(word => {
+    queries.push(axios.get(`https://swapi.dev/api/people/?search=${word}`))
+    queries.push(axios.get(`https://swapi.dev/api/planets/?search=${word}`))
+    queries.push(axios.get(`https://swapi.dev/api/species/?search=${word}`))
+    queries.push(axios.get(`https://swapi.dev/api/starships/?search=${word}`))
+    queries.push(axios.get(`https://swapi.dev/api/vehicles/?search=${word}`))
+  })
 
-  const uniqueFilmIdList = await Promise.all([
-    peoplePromise,
-    planetsPromise,
-    speciesPromise,
-    starshipsPromise,
-    vehiclesPromise
-  ])
+  const uniqueFilmIdList = await Promise.all(queries)
     .then(resList => {
-      const filmIdList = resList.map(res => mapGenericResponse(res.data)).flat()
-      return [...new Set(filmIdList)]
+      const filmIdLists = resList
+        .map(res => mapGenericResponse(res.data))
+        .filter(list => list.length !== 0)
+
+      const foundInEvery = filmIdLists
+        .map(filmIdList =>
+          filmIdList.filter(filmId =>
+            filmIdLists.every(_filmIdList => _filmIdList.includes(filmId))
+          )
+        )
+        .flat()
+
+      console.log('foundInEvery', foundInEvery)
+
+      return [...new Set(foundInEvery)]
     })
     .catch(err => {
       return err

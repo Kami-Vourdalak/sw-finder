@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AppButton from '../app-button/app-button'
 import AppTextInput from '../app-text-input/app-text-input'
 import { useQuery } from 'react-query'
@@ -13,12 +13,15 @@ export default function SearchForm() {
   const { refetch } = useQuery(['search', searchTerm], fetchSwFilmsByQuery, {
     enabled: false
   })
+  useEffect(() => {
+    if (searchTerm) refetch()
+  }, [searchTerm])
+
   function handleSearchChange(event) {
     setSearchInput(event.target.value)
   }
   function handleSearch() {
     setSearchTerm(searchInput)
-    refetch()
   }
   return (
     <div className="flex justify-center items-end flex-col sm:flex-row mx-6">
