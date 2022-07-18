@@ -4,7 +4,8 @@ export default function AppButton({
   text,
   onClick,
   className = '',
-  type = 'primary'
+  type = 'primary',
+  dataCy = ''
 }) {
   const typeClass = useMemo(() => {
     switch (type) {
@@ -20,6 +21,7 @@ export default function AppButton({
     <button
       className={`p-2 rounded-md ${typeClass} ${className}`}
       onClick={onClick}
+      data-cy={dataCy}
     >
       {text}
     </button>

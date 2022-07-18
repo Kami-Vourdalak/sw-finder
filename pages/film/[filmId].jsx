@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useQuery } from 'react-query'
-import { fetchSwFilm } from '../../utils/api'
+import api from '../../utils/api'
 import Crawl from 'react-star-wars-crawl'
 
 // Import the necessary styles, or include them another way with your build process
@@ -15,7 +15,7 @@ export default function Film() {
     data: film,
     isLoading,
     isError
-  } = useQuery(['film', filmId], fetchSwFilm, { enabled: !!filmId })
+  } = useQuery(['film', filmId], api.fetchSwFilm, { enabled: !!filmId })
 
   if (isError) return <div>An error occurred</div>
   if (isLoading) return <div>Loading...</div>

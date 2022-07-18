@@ -2,7 +2,7 @@ import { useAtom } from 'jotai'
 import { searchTermAtom } from '../../store'
 import FilmCard from '../film-card/film-card'
 import { useQuery } from 'react-query'
-import { fetchSwFilmsByQuery } from '../../utils/api'
+import api from '../../utils/api'
 
 export default function FilmList() {
   const [searchTerm] = useAtom(searchTermAtom)
@@ -11,7 +11,7 @@ export default function FilmList() {
     data: films,
     isLoading,
     isError
-  } = useQuery(['search', searchTerm], fetchSwFilmsByQuery, {
+  } = useQuery(['search', searchTerm], api.fetchSwFilmsByQuery, {
     enabled: !!searchTerm
   })
 

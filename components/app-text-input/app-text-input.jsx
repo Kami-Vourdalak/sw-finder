@@ -3,11 +3,16 @@ export default function AppTextInput({
   label = '',
   onChange,
   className = '',
-  id
+  id,
+  dataCy = ''
 }) {
   return (
     <div className={className}>
-      <label className="text-left text-sm w-full" htmlFor={id}>
+      <label
+        className="text-left text-sm w-full"
+        htmlFor={id}
+        data-cy={`${dataCy}-label`}
+      >
         {label}
       </label>
       <input
@@ -16,6 +21,7 @@ export default function AppTextInput({
         type="text"
         value={value}
         onChange={onChange}
+        data-cy={`${dataCy}-input`}
       />
     </div>
   )

@@ -1,0 +1,37 @@
+// ***********************************************************
+// This example support/component.js is processed and
+// loaded automatically before your test files.
+//
+// This is a great place to put global configuration and
+// behavior that modifies Cypress.
+//
+// You can change the location of this file or turn off
+// automatically serving support files with the
+// 'supportFile' configuration option.
+//
+// You can read more here:
+// https://on.cypress.io/configuration
+// ***********************************************************
+
+// Import commands.js using ES2015 syntax:
+import './commands'
+import '@testing-library/cypress/add-commands'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { mount } from 'cypress/react'
+
+const queryClient = new QueryClient()
+
+Cypress.Commands.add('mount', (component, options = {}) => {
+  if (options.withQuery) {
+    return mount(
+      <QueryClientProvider client={queryClient}>
+        {component}
+      </QueryClientProvider>
+    )
+  }
+
+  return mount(component)
+})
+
+// Example use:
+// cy.mount(<MyComponent />)

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import AppButton from '../app-button/app-button'
 import AppTextInput from '../app-text-input/app-text-input'
 import { useQuery } from 'react-query'
-import { fetchSwFilmsByQuery } from '../../utils/api'
+import api from '../../utils/api'
 import { searchTermAtom } from '../../store'
 import { useAtom } from 'jotai'
 
@@ -10,9 +10,13 @@ export default function SearchForm() {
   const [searchTerm, setSearchTerm] = useAtom(searchTermAtom)
   const [searchInput, setSearchInput] = useState('')
 
-  const { refetch } = useQuery(['search', searchTerm], fetchSwFilmsByQuery, {
-    enabled: false
-  })
+  const { refetch } = useQuery(
+    ['search', searchTerm],
+    api.fetchSwFilmsByQuery,
+    {
+      enabled: false
+    }
+  )
   useEffect(() => {
     if (searchTerm) refetch()
   }, [searchTerm])
@@ -24,18 +28,23 @@ export default function SearchForm() {
     setSearchTerm(searchInput)
   }
   return (
-    <div className="flex justify-center items-end flex-col sm:flex-row mx-6">
+    <div
+      className="flex justify-center items-end flex-col sm:flex-row mx-6"
+      data-cy="search-form"
+    >
       <AppTextInput
         label="Search films by title, characters or planets."
         className="w-full mb-2 sm:m-0"
         value={searchInput}
         onChange={handleSearchChange}
+        dataCy="search-input"
       />
       <AppButton
         className="w-full sm:w-auto"
         text="Go"
         type="primary"
         onClick={handleSearch}
+        dataCy="go-button"
       />
     </div>
   )
