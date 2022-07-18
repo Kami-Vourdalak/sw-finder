@@ -8,7 +8,10 @@ function getFilmId(filmUrl) {
 
 export function mapGenericResponse({ results }) {
   return results
-    .map(result => result?.films?.map(filmUrl => getFilmId(filmUrl)))
+    .map(result => {
+      if (result.films) return result.films.map(filmUrl => getFilmId(filmUrl))
+      return [getFilmId(result.url)]
+    })
     ?.flat()
 }
 

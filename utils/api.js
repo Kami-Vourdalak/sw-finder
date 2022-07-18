@@ -14,6 +14,7 @@ export async function fetchSwFilmsByQuery({ queryKey }) {
     queries.push(axios.get(`https://swapi.dev/api/species/?search=${word}`))
     queries.push(axios.get(`https://swapi.dev/api/starships/?search=${word}`))
     queries.push(axios.get(`https://swapi.dev/api/vehicles/?search=${word}`))
+    queries.push(axios.get(`https://swapi.dev/api/films/?search=${word}`))
   })
 
   const uniqueFilmIdList = await Promise.all(queries)
