@@ -1,6 +1,13 @@
 import { mapFilm, mapGenericResponse } from './mapResponses'
 import axios from 'axios'
 
+export async function fetchSwFilm({ queryKey }) {
+  const [, filmId] = queryKey
+
+  const response = await axios.get(`https://swapi.dev/api/films/${filmId}`)
+  return mapFilm(response?.data)
+}
+
 export async function fetchSwFilmsByQuery({ queryKey }) {
   const [, query] = queryKey
   const words = query.includes(' ')

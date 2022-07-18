@@ -9,7 +9,7 @@ export default function FilmCard({ id, title, releaseDate, episode }) {
   }, [releaseDate])
   return (
     <Link href={`/film/${id}`}>
-      <div className="flex flex-col w-full p-8 border rounded-xl">
+      <div className="flex flex-col w-full p-8 border rounded-xl cursor-pointer">
         <div>{title}</div>
         <div>Episode {episode}</div>
         <div className="self-end text-xs">{formattedDate}</div>

@@ -19,12 +19,18 @@ export function mapFilm({
   url,
   title,
   episode_id: episode,
-  release_date: releaseDate
+  release_date: releaseDate,
+  director,
+  producer,
+  opening_crawl: openingCrawl
 }) {
   return {
     id: getFilmId(url),
     title,
     episode: mapEpisode(episode),
-    releaseDate
+    releaseDate,
+    director,
+    producer,
+    openingCrawl
   }
 }
