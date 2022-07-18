@@ -43,6 +43,7 @@ async function fetchSwFilmsByQuery({ queryKey }) {
       return [...new Set(foundInEvery)]
     })
     .catch(err => {
+      console.log('err', err)
       return err
     })
 
