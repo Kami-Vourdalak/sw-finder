@@ -4,8 +4,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ### Getting Started
 
-First, run the development server:
+First, run the installation of the dependencies:
 
+```bash
+npm i
+```
+
+Then you can start the server:
 ```bash
 npm run dev
 ```
@@ -26,4 +31,3 @@ If you want to see the Cypress interface run:
 ```bash
 npm run cypress
 ```
-
