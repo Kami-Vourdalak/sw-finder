@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
       <main>
         <SearchForm />
-        <div className="flex flex-wrap w-full p-6">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 m-6">
           <FilmList />
         </div>
       </main>
